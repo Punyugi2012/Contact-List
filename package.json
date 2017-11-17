@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/Punyugi2012/Contact-List/issues"
   },
-  "homepage": "https://github.com/Punyugi2012/Contact-List#readme"
+  "homepage": "https://github.com/Punyugi2012/Contact-List#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta.2",
+    "express": "^4.16.2",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.7"
+  }
 }

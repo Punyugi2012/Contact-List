@@ -1,0 +1,19 @@
+{
+  "name": "contact-list",
+  "version": "1.0.0",
+  "description": "Welcome, My Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Punyugi2012/Contact-List.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Punyugi2012/Contact-List/issues"
+  },
+  "homepage": "https://github.com/Punyugi2012/Contact-List#readme"
+}

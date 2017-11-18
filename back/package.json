@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Punyugi2012/Contact-List#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2"
   }
 }

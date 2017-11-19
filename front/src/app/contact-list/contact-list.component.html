@@ -1,19 +1,6 @@
-
-  <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action">
-                <span class="badge badge-info badge-pill">1</span>
-            <b> ac facilisis i </b>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-                <span class="badge badge-info badge-pill">2</span>
-            <b>Dapibus ac facilisis in</b>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-                <span class="badge badge-info badge-pill">3</span>
-            <b> Dapibus ac facilisis in</b>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-                <span class="badge badge-info badge-pill">4</span>
-            <b> Dapibus ac facilisis in</b>
-        </a>
+<div class="list-group" *ngFor="let person of persons;let i = index;">
+  <a routerLink="/profile/{{person.firstName}}/{{person.lastName}}/{{person.phone}}" class="list-group-item list-group-item-action">
+    <span class="badge badge-info badge-pill">{{i + 1}}</span>
+    <b> {{person.firstName}} {{person.lastName}} </b>
+  </a>
 </div>

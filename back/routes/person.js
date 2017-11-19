@@ -7,17 +7,21 @@ router.get('/get-all', (req, res) => {
     res.json(persons);
 });
 
-router.get('/get/:firtName/:lastName/:phone', (req, res) => {
+router.get('/get/:firstName/:lastName/:phone', (req, res) => {
+    var found = false;
     persons.forEach(function (person) {
         if (
             person.firstName === req.params.firstName &&
             person.lastName === req.params.lastName &&
             person.phone === req.params.phone
         ) {
-            res.json(persons);
+            res.json(person);
+            found = true;
         }
     });
-    res.json('not found');
+    if(!found) {
+        res.json('not found');
+    }
 });
 
 router.post('/add-person', (req, res) => {
@@ -28,10 +32,10 @@ router.post('/add-person', (req, res) => {
         !(req.body.phone) ||
         !(req.body.notes)
     ) {
-        res.status(404);
-        res.json('add not success!!');
+        res.json('not success');
     }
     else {
+        var duplicate = false;
         persons.forEach(function (person) {
             if (
                 req.body.firstName === person.firstName &&
@@ -40,34 +44,40 @@ router.post('/add-person', (req, res) => {
                 req.body.phone === person.phone &&
                 req.body.notes === person.notes
             ) {
-                res.json('was already!!');
+                res.json('duplicate');
+                duplicate = true;
             }
         });
-        var newPerson = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            phone: req.body.phone,
-            notes: req.body.notes
+        if (!duplicate) {
+            var newPerson = {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                phone: req.body.phone,
+                notes: req.body.notes
+            }
+            persons.push(newPerson);
+            res.json('success');
         }
-        persons.push(newPerson);
-        res.json('add success!!');
     }
 });
 
 router.delete('/delete-person/:firstName/:lastName/:phone', (req, res) => {
+    var found = false;
     persons.forEach(function (person, index) {
         if (
             person.firstName === req.params.firstName &&
             person.lastName === req.params.lastName &&
             person.phone === req.params.phone
         ) {
-            console.log(index);
             persons.splice(index, 1);
-            res.json('delete success!!');
+            res.json('success');
+            found = true;
         }
     });
-    res.json('delete not success!!');
+    if (!found) {
+        res.json('not success');
+    }
 });
 
 module.exports = router;

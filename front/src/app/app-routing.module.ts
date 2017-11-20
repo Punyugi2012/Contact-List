@@ -1,3 +1,4 @@
+import { EditPersonComponent } from './edit-person/edit-person.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContactListComponent } from './contact-list/contact-list.component';
@@ -8,7 +9,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'home',
-    component: PersonProfileComponent
+    component: ContactListComponent
   },
   {
     path: 'profile/:firstName/:lastName/:phone',
@@ -17,7 +18,12 @@ const routes: Routes = [
   {
     path: 'add-person',
     component: AddPersonComponent
-  }
+  },
+  {
+    path: 'edit-person',
+    component: EditPersonComponent
+  },
+  { path: '**', redirectTo: '/home',  pathMatch: 'full' }
 ];
 
 @NgModule({

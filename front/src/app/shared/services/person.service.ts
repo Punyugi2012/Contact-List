@@ -15,4 +15,7 @@ export class PersonService {
   getPerson(firstName, lastName, phone): Observable<Person> {
     return this.http.get<Person>(`${this.path}/get/${firstName}/${lastName}/${phone}`);
   }
+  deletePerson(firstName, lastName, phone): Observable<any> {
+    return this.http.delete<any>(`${this.path}/delete-person/${firstName}/${lastName}/${phone}`);
+  }
 }

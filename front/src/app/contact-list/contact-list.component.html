@@ -1,6 +1,13 @@
-<div class="list-group" *ngFor="let person of persons;let i = index;">
+<app-search-person></app-search-person>
+<div class="alert alert-warning text-center" role="alert" *ngIf="lengthOfPersons === 0">
+  ..Empty..
+</div>
+<div class="list-group" *ngFor="let person of persons | paginate: { itemsPerPage: 10, currentPage: p}">
   <a routerLink="/profile/{{person.firstName}}/{{person.lastName}}/{{person.phone}}" class="list-group-item list-group-item-action">
-    <span class="badge badge-info badge-pill">{{i + 1}}</span>
+    <span class="badge badge-info badge-pill">
+      <i class="fa fa-user-circle" aria-hidden="true"></i>
+    </span>
     <b> {{person.firstName}} {{person.lastName}} </b>
   </a>
 </div>
+<pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>

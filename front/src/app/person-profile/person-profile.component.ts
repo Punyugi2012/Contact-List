@@ -2,32 +2,46 @@ import { PersonService } from '../shared/services/person.service';
 import { Component, OnInit } from '@angular/core';
 import { Person } from '../shared/models/person.model';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-person-profile',
   templateUrl: './person-profile.component.html',
   styleUrls: ['./person-profile.component.css']
 })
 export class PersonProfileComponent implements OnInit {
-  person: Person = null;
+  person: Person;
   constructor(
     private route: ActivatedRoute,
-    private personService: PersonService
-  ) { }
-
-  ngOnInit() {
+    private personService: PersonService,
+    private location: Location
+  ) {
     this.getPerson();
   }
+  ngOnInit() { }
   getPerson(): void {
     const firstName = this.route.snapshot.paramMap.get('firstName');
-    const lastName =  this.route.snapshot.paramMap.get('lastName');
+    const lastName = this.route.snapshot.paramMap.get('lastName');
     const phone = this.route.snapshot.paramMap.get('phone');
     this.personService.getPerson(firstName, lastName, phone)
-    .subscribe(
+      .subscribe(
       (res) => {
         this.person = res.firstName ? res : null;
-        console.log('get success!!');
       }
-    );
+      );
+  }
+  deletePerson(firstName, lastName, phone): void {
+    const result = confirm('Are you sure?');
+    if (result) {
+      this.personService.deletePerson(firstName, lastName, phone).subscribe(
+        (res) => {
+          this.location.back();
+        }
+      );
+    }
+  }
+  goBack(): void {
+    this.location.back();
   }
 
 }

@@ -1,0 +1,14 @@
+<div id="search" class="float-right position-relative">
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </span>
+    <input type="text" [ngModel]="''" (ngModelChange)="updateData($event)" class="form-control" placeholder="search by firstname, lastname, phone"
+      aria-label="Username" aria-describedby="basic-addon1">
+  </div>
+  <ul class="list-group position-absolute">
+    <li class="list-group-item list-group-item-action" *ngFor="let person of filteredData" routerLink="/profile/{{person.firstName}}/{{person.lastName}}/{{person.phone}}">
+      {{person.firstName}} {{person.lastName}} {{person.phone}}
+    </li>
+  </ul>
+</div>

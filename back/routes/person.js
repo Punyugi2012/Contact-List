@@ -7,24 +7,23 @@ router.get('/get-all', (req, res) => {
     res.json(persons);
 });
 
+
 router.get('/get/:firstName/:lastName/:phone', (req, res) => {
-    var found = false;
+    var getPerson = {};
     persons.forEach(function (person) {
         if (
             person.firstName === req.params.firstName &&
             person.lastName === req.params.lastName &&
             person.phone === req.params.phone
         ) {
-            res.json(person);
-            found = true;
+            getPerson = person;
         }
     });
-    if(!found) {
-        res.json('not found');
-    }
+    res.json(getPerson);
 });
 
 router.post('/add-person', (req, res) => {
+    var state, duplicate = false;
     if (
         !(req.body.firstName) ||
         !(req.body.lastName) ||
@@ -32,10 +31,9 @@ router.post('/add-person', (req, res) => {
         !(req.body.phone) ||
         !(req.body.notes)
     ) {
-        res.json('not success');
+        state = 'not success';
     }
     else {
-        var duplicate = false;
         persons.forEach(function (person) {
             if (
                 req.body.firstName === person.firstName &&
@@ -44,7 +42,7 @@ router.post('/add-person', (req, res) => {
                 req.body.phone === person.phone &&
                 req.body.notes === person.notes
             ) {
-                res.json('duplicate');
+                state = 'duplicate';
                 duplicate = true;
             }
         });
@@ -57,13 +55,14 @@ router.post('/add-person', (req, res) => {
                 notes: req.body.notes
             }
             persons.push(newPerson);
-            res.json('success');
+            state = 'success';
         }
     }
+    res.json(state);
 });
 
 router.delete('/delete-person/:firstName/:lastName/:phone', (req, res) => {
-    var found = false;
+    var state = 'not success';
     persons.forEach(function (person, index) {
         if (
             person.firstName === req.params.firstName &&
@@ -71,13 +70,10 @@ router.delete('/delete-person/:firstName/:lastName/:phone', (req, res) => {
             person.phone === req.params.phone
         ) {
             persons.splice(index, 1);
-            res.json('success');
-            found = true;
+            state = 'success';
         }
     });
-    if (!found) {
-        res.json('not success');
-    }
+    res.json(state);
 });
 
 module.exports = router;

@@ -9,6 +9,8 @@ import { Person } from '../shared/models/person.model';
 })
 export class ContactListComponent implements OnInit {
   persons: Person[];
+  lengthOfPersons = 0;
+  p = 1;
   constructor(
     private personService: PersonService
   ) { }
@@ -19,7 +21,7 @@ export class ContactListComponent implements OnInit {
     this.personService.getPersons().subscribe(
       (res) => {
         this.persons = res;
-        console.log('get success!!');
+        this.lengthOfPersons = this.persons.length;
       }
     );
   }

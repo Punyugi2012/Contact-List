@@ -1,12 +1,44 @@
+<button class="btn btn-primary" (click)="goBack()">
+  <i class="fa fa-angle-left" aria-hidden="true"></i>
+  <i>Go Back</i>
+</button>
+<br>
+<br>
 <div class="card">
   <div class="card-body">
-    <p><label for="name">name: </label> <input id="name" class="form-control" type="text" ng-model="currentContact.name"> </p>
-    <p><label for="email">email:</label> <input id="email" class="form-control" type="text" ng-model="currentContact.email"> </p>
-    <p><label for="phone">phone:</label> <input id="phone" class="form-control" type="text" ng-model="currentContact.phone"> </p>
-    <p><label for="url">url:</label> <input id="url" class="form-control" type="text" ng-model="currentContact.url"> </p>
-    <p><label for="notes">notes:</label></p>
-    <textarea class="form-control" id="notes" rows="3" ng-model="currentContact.notes"></textarea>
-    <br><button type="button">Add</button>
-    <button type="button">Cancel</button>
+    <h4 class="card-title text-center">
+      <i class="fa fa-plus" aria-hidden="true"></i>Add Contact</h4>
+    <form #createForm="ngForm" (ngSubmit)="addPerson()">
+      <div class="form-group">
+        <label for="firstName">*First Name: </label>
+        <input [(ngModel)]="newPerson.firstName" class="form-control" type="text" name="firstName" placeholder="first name" required>
+      </div>
+      <div class="form-group">
+        <label for="lastName">*Last Name:</label>
+        <input [(ngModel)]="newPerson.lastName" class="form-control" type="text" name="lastName" placeholder="last name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input [(ngModel)]="newPerson.email" class="form-control" type="email" name="email" placeholder="email">
+      </div>
+      <div class="form-group">
+        <label for="phone">*Phone:</label>
+        <input [(ngModel)]="newPerson.phone" class="form-control" type="text" name="phone" placeholder="phone number" required>
+      </div>
+      <div class="form-group">
+        <label for="notes">Notes:</label>
+        <textarea [(ngModel)]="newPerson.notes" class="form-control" name="notes" rows="3" placeholder="notes"></textarea>
+      </div>
+      <div align="center">
+        <button type="submit" class="btn btn-success" [disabled]="!createForm.form.valid">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <i>Add</i>
+        </button>
+        <button type="reset" class="btn btn-danger">
+          <i class="fa fa-times" aria-hidden="true"></i>
+          <i>Cancel</i>
+        </button>
+      </div>
+    </form>
   </div>
 </div>

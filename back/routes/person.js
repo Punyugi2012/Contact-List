@@ -61,6 +61,40 @@ router.post('/add-person', (req, res) => {
     res.json(state);
 });
 
+router.put('/edit-person/:firstName/:lastName/:phone',(req, res) => {
+    var state;
+    console.log(req.params);
+    if (
+        !(req.body.firstName) ||
+        !(req.body.lastName) ||
+        !(req.body.email) ||
+        !(req.body.phone) ||
+        !(req.body.notes) ||
+        !(req.params.firstName) ||
+        !(req.params.lastName) ||
+        !(req.params.phone)
+    ) {
+        state = 'not success';
+    }
+    else {
+        persons.forEach(function (person) {
+            if (
+                req.params.firstName === person.firstName &&
+                req.params.lastName === person.lastName &&
+                req.params.phone === person.phone
+            ) {
+                person.firstName = req.body.firstName;
+                person.lastName = req.body.lastName;
+                person.email = req.body.email;
+                person.phone = req.body.phone;
+                person.notes = req.body.notes;
+                state = 'success';
+            }
+        });
+    }
+    res.json(state);
+});
+
 router.delete('/delete-person/:firstName/:lastName/:phone', (req, res) => {
     var state = 'not success';
     persons.forEach(function (person, index) {

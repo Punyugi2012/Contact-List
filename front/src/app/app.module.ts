@@ -1,4 +1,4 @@
-import { NgModel } from '@angular/forms/src/directives';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PersonService } from './shared/services/person.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,7 +12,6 @@ import { AddPersonComponent } from './add-person/add-person.component';
 import { EditPersonComponent } from './edit-person/edit-person.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { SearchPersonComponent } from './search-person/search-person.component';
-import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
@@ -29,8 +28,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [
     PersonService

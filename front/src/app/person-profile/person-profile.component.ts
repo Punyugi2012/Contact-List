@@ -1,7 +1,7 @@
 import { PersonService } from '../shared/services/person.service';
 import { Component, OnInit } from '@angular/core';
 import { Person } from '../shared/models/person.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -14,7 +14,8 @@ export class PersonProfileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private personService: PersonService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {
     this.getPerson();
   }
@@ -26,7 +27,10 @@ export class PersonProfileComponent implements OnInit {
     this.personService.getPerson(firstName, lastName, phone)
       .subscribe(
       (res) => {
-        this.person = res.firstName ? res : null;
+        if (!res.firstName) {
+          this.router.navigate(['/home']);
+        }
+        this.person = res;
       }
       );
   }

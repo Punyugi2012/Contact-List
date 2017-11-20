@@ -20,7 +20,7 @@ const routes: Routes = [
     component: AddPersonComponent
   },
   {
-    path: 'edit-person',
+    path: 'edit-person/:firstName/:lastName/:phone',
     component: EditPersonComponent
   },
   { path: '**', redirectTo: '/home',  pathMatch: 'full' }

@@ -8,7 +8,7 @@
   <div class="card-body">
     <h4 class="card-title text-center">
       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Contact</h4>
-    <form #editForm="ngForm" (ngSubmit)="editPerson()">
+    <form #editForm="ngForm" (ngSubmit)="editPerson()" autocomplete="off">
       <div class="form-group">
         <label for="firstName">*First Name: </label>
         <input [(ngModel)]="person.firstName" class="form-control" type="text" name="firstName" placeholder="first name" required>
@@ -19,7 +19,7 @@
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input [(ngModel)]="person.email" class="form-control" type="email" name="email" placeholder="email">
+        <input [(ngModel)]="person.email" class="form-control" type="text" name="email" placeholder="email">
       </div>
       <div class="form-group">
         <label for="phone">*Phone:</label>

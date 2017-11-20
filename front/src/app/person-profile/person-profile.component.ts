@@ -17,9 +17,10 @@ export class PersonProfileComponent implements OnInit {
     private location: Location,
     private router: Router
   ) {
+  }
+  ngOnInit() {
     this.getPerson();
   }
-  ngOnInit() { }
   getPerson(): void {
     const firstName = this.route.snapshot.paramMap.get('firstName');
     const lastName = this.route.snapshot.paramMap.get('lastName');

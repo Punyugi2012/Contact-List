@@ -28,7 +28,7 @@ export class PersonProfileComponent implements OnInit {
       .subscribe(
       (res) => {
         if (!res.firstName) {
-          this.router.navigate(['/home']);
+          this.goBack();
         }
         this.person = res;
       }
@@ -39,13 +39,13 @@ export class PersonProfileComponent implements OnInit {
     if (result) {
       this.personService.deletePerson(id).subscribe(
         (res) => {
-          this.location.back();
+          this.goBack();
         }
       );
     }
   }
   goBack(): void {
-    this.location.back();
+    this.router.navigate(['/home']);
   }
 
 }

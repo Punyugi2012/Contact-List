@@ -7,7 +7,7 @@
       aria-label="Username" aria-describedby="basic-addon1">
   </div>
   <ul class="list-group position-absolute">
-    <li class="list-group-item list-group-item-action" *ngFor="let person of filteredData" routerLink="/profile/{{person.firstName}}/{{person.lastName}}/{{person.phone}}">
+    <li class="list-group-item list-group-item-action" *ngFor="let person of filteredData" routerLink="/profile/{{person.id}}">
       {{person.firstName}} {{person.lastName}} {{person.phone}}
     </li>
   </ul>

@@ -8,105 +8,85 @@ router.get('/get-all', (req, res) => {
 });
 
 
-router.get('/get/:firstName/:lastName/:phone', (req, res) => {
-    var getPerson = {};
-    persons.forEach(function (person) {
+router.get('/get/:id', (req, res) => {
+    var getPerson = 'not success';
+    for(var i = 0; i < persons.length; i++) {
         if (
-            person.firstName === req.params.firstName &&
-            person.lastName === req.params.lastName &&
-            person.phone === req.params.phone
+            persons[i].id === req.params.id
         ) {
-            getPerson = person;
+            getPerson = persons[i];
+            break;
         }
-    });
+    }
     res.json(getPerson);
 });
 
 router.post('/add-person', (req, res) => {
-    var state, duplicate = false;
-    if (
-        !(req.body.firstName) ||
-        !(req.body.lastName) ||
-        !(req.body.email) ||
-        !(req.body.phone) ||
-        !(req.body.notes)
-    ) {
-        state = 'not success';
-    }
-    else {
-        persons.forEach(function (person) {
-            if (
-                req.body.firstName === person.firstName &&
-                req.body.lastName === person.lastName &&
-                req.body.email === person.email &&
-                req.body.phone === person.phone &&
-                req.body.notes === person.notes
-            ) {
-                state = 'duplicate';
-                duplicate = true;
-            }
-        });
-        if (!duplicate) {
-            var newPerson = {
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                phone: req.body.phone,
-                notes: req.body.notes
-            }
-            persons.push(newPerson);
-            state = 'success';
-        }
-    }
-    res.json(state);
-});
-
-router.put('/edit-person/:firstName/:lastName/:phone',(req, res) => {
     var state;
-    console.log(req.params);
     if (
         !(req.body.firstName) ||
-        !(req.body.lastName) ||
-        !(req.body.email) ||
-        !(req.body.phone) ||
-        !(req.body.notes) ||
-        !(req.params.firstName) ||
-        !(req.params.lastName) ||
-        !(req.params.phone)
+        !(req.body.lastName)  ||
+        !(req.body.phone)
     ) {
         state = 'not success';
     }
     else {
-        persons.forEach(function (person) {
-            if (
-                req.params.firstName === person.firstName &&
-                req.params.lastName === person.lastName &&
-                req.params.phone === person.phone
-            ) {
-                person.firstName = req.body.firstName;
-                person.lastName = req.body.lastName;
-                person.email = req.body.email;
-                person.phone = req.body.phone;
-                person.notes = req.body.notes;
-                state = 'success';
-            }
-        });
+        var newId = 0;
+        if(persons.length) {
+            
+            newId = parseInt(persons[persons.length - 1].id) + 1;
+        }
+        var newPerson = {
+            id: newId.toString(),
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            phone: req.body.phone,
+            notes: req.body.notes
+        }
+        persons.push(newPerson);
+        state = 'success';
     }
     res.json(state);
 });
 
-router.delete('/delete-person/:firstName/:lastName/:phone', (req, res) => {
-    var state = 'not success';
-    persons.forEach(function (person, index) {
-        if (
-            person.firstName === req.params.firstName &&
-            person.lastName === req.params.lastName &&
-            person.phone === req.params.phone
-        ) {
-            persons.splice(index, 1);
-            state = 'success';
+router.put('/edit-person/:id',(req, res) => {
+    var state;
+    if (
+        !(req.body.firstName)   ||
+        !(req.body.lastName)    ||
+        !(req.body.phone)      
+    ) {
+        state = 'not success';
+    }
+    else {
+        var i = 0;
+        for(i = 0; i < persons.length; i++) {
+            if(persons[i].id === req.params.id) {
+                persons[i].firstName = req.body.firstName;
+                persons[i].lastName = req.body.lastName;
+                persons[i].email = req.body.email;
+                persons[i].phone = req.body.phone;
+                persons[i].notes = req.body.notes;
+                state = 'success';
+                break;
+            }
         }
-    });
+    }
+    res.json(state);
+});
+
+router.delete('/delete-person/:id', (req, res) => {
+    var state = 'not success';
+    for(var i = 0; i < persons.length; i++) {
+        if (
+            persons[i].id === req.params.id
+        ) {
+            persons.splice(i, 1);
+            state = 'success';
+            break;
+        }
+    }
     res.json(state);
 });
 

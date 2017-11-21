@@ -12,7 +12,7 @@ const routes: Routes = [
     component: ContactListComponent
   },
   {
-    path: 'profile/:firstName/:lastName/:phone',
+    path: 'profile/:id',
     component: PersonProfileComponent
   },
   {
@@ -20,7 +20,7 @@ const routes: Routes = [
     component: AddPersonComponent
   },
   {
-    path: 'edit-person/:firstName/:lastName/:phone',
+    path: 'edit-person/:id',
     component: EditPersonComponent
   },
   { path: '**', redirectTo: '/home',  pathMatch: 'full' }

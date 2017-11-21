@@ -11,9 +11,6 @@ import { Location } from '@angular/common';
 })
 export class EditPersonComponent implements OnInit {
   person: Person = new Person();
-  firstName = '';
-  lastName = '';
-  phone = '';
   constructor(
     private personService: PersonService,
     private route: ActivatedRoute,
@@ -24,10 +21,8 @@ export class EditPersonComponent implements OnInit {
     this.getPerson();
   }
   getPerson(): void {
-    this.firstName = this.route.snapshot.paramMap.get('firstName');
-    this.lastName = this.route.snapshot.paramMap.get('lastName');
-    this.phone = this.route.snapshot.paramMap.get('phone');
-    this.personService.getPerson(this.firstName, this.lastName, this.phone)
+    const id = this.route.snapshot.paramMap.get('id');
+    this.personService.getPerson(id)
       .subscribe(
       (res) => {
         if (!res.firstName) {
@@ -38,9 +33,9 @@ export class EditPersonComponent implements OnInit {
       );
   }
   editPerson(): void {
-    this.personService.editPerson(this.firstName, this.lastName, this.phone, this.person).subscribe(
+    this.personService.editPerson(this.person).subscribe(
       (res) => {
-        this.router.navigate(['/home']);
+        this.router.navigate([`/profile/${this.person.id}`]);
       }
     );
   }

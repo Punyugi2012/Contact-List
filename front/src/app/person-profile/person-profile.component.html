@@ -20,11 +20,11 @@
       <p class="rounded">
         {{person.notes}}
       </p>
-      <a class="btn btn-warning" routerLink="/edit-person/{{person.firstName}}/{{person.lastName}}/{{person.phone}}">
+      <a class="btn btn-warning" routerLink="/edit-person/{{person.id}}">
         <i class="fa fa-pencil" aria-hidden="true"></i>
         <i>Edit</i>
       </a>
-      <button class="btn btn-danger" (click)="deletePerson(person.firstName, person.lastName, person.phone)">
+      <button class="btn btn-danger" (click)="deletePerson(person.id)">
         <i class="fa fa-minus-circle" aria-hidden="true"></i>
         <i>Remove</i>
       </button>

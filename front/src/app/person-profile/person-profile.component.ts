@@ -1,3 +1,4 @@
+import { identifierName } from '@angular/compiler';
 import { PersonService } from '../shared/services/person.service';
 import { Component, OnInit } from '@angular/core';
 import { Person } from '../shared/models/person.model';
@@ -22,10 +23,8 @@ export class PersonProfileComponent implements OnInit {
     this.getPerson();
   }
   getPerson(): void {
-    const firstName = this.route.snapshot.paramMap.get('firstName');
-    const lastName = this.route.snapshot.paramMap.get('lastName');
-    const phone = this.route.snapshot.paramMap.get('phone');
-    this.personService.getPerson(firstName, lastName, phone)
+    const id = this.route.snapshot.paramMap.get('id');
+    this.personService.getPerson(id)
       .subscribe(
       (res) => {
         if (!res.firstName) {
@@ -35,10 +34,10 @@ export class PersonProfileComponent implements OnInit {
       }
       );
   }
-  deletePerson(firstName, lastName, phone): void {
+  deletePerson(id): void {
     const result = confirm('Are you sure?');
     if (result) {
-      this.personService.deletePerson(firstName, lastName, phone).subscribe(
+      this.personService.deletePerson(id).subscribe(
         (res) => {
           this.location.back();
         }

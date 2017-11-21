@@ -18,16 +18,16 @@ export class PersonService {
   getPersons(): Observable<Person[]> {
     return this.http.get<Person[]>(`${this.path}/get-all`);
   }
-  getPerson(firstName, lastName, phone): Observable<Person> {
-    return this.http.get<Person>(`${this.path}/get/${firstName}/${lastName}/${phone}`);
+  getPerson(id): Observable<Person> {
+    return this.http.get<Person>(`${this.path}/get/${id}`);
   }
-  deletePerson(firstName, lastName, phone): Observable<any> {
-    return this.http.delete<any>(`${this.path}/delete-person/${firstName}/${lastName}/${phone}`);
+  deletePerson(id): Observable<any> {
+    return this.http.delete<any>(`${this.path}/delete-person/${id}`);
   }
   addPerson(person): Observable<any> {
     return this.http.post<any>(`${this.path}/add-person`, JSON.stringify(person), httpOptions);
   }
-  editPerson(firstName, lastName, phone, person): Observable<any> {
-    return this.http.put<any>(`${this.path}/edit-person/${firstName}/${lastName}/${phone}`, JSON.stringify(person), httpOptions);
+  editPerson(person): Observable<any> {
+    return this.http.put<any>(`${this.path}/edit-person/${person.id}`, JSON.stringify(person), httpOptions);
   }
 }

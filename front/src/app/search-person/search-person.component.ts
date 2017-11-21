@@ -27,8 +27,8 @@ export class SearchPersonComponent implements OnInit {
     if (query) {
       this.filteredData = _.filter(this.persons,
         (person) => person.firstName.indexOf(query) >= 0 ||
-        person.lastName.indexOf(query) >= 0 ||
-        person.phone.indexOf(query) >= 0
+          person.phone.indexOf(query) >= 0 ||
+          person.lastName.indexOf(query) >= 0
       );
     } else {
       this.filteredData = [];

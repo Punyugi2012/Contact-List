@@ -11,23 +11,23 @@ const httpOptions = {
 };
 @Injectable()
 export class PersonService {
-  path = 'http://localhost:4000/person';
+  path = 'http://localhost:4000/api/persons';
   constructor(
     private http: HttpClient
   ) { }
   getPersons(): Observable<Person[]> {
-    return this.http.get<Person[]>(`${this.path}/get-all`);
+    return this.http.get<Person[]>(`${this.path}/`);
   }
   getPerson(id): Observable<Person> {
-    return this.http.get<Person>(`${this.path}/get/${id}`);
+    return this.http.get<Person>(`${this.path}/${id}`);
   }
   deletePerson(id): Observable<any> {
-    return this.http.delete<any>(`${this.path}/delete-person/${id}`);
+    return this.http.delete<any>(`${this.path}/${id}`);
   }
   addPerson(person): Observable<any> {
-    return this.http.post<any>(`${this.path}/add-person`, JSON.stringify(person), httpOptions);
+    return this.http.post<any>(`${this.path}/`, JSON.stringify(person), httpOptions);
   }
   editPerson(person): Observable<any> {
-    return this.http.put<any>(`${this.path}/edit-person/${person.id}`, JSON.stringify(person), httpOptions);
+    return this.http.put<any>(`${this.path}/${person.id}`, JSON.stringify(person), httpOptions);
   }
 }

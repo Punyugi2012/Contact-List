@@ -3,12 +3,12 @@ var router = express.Router();
 
 var persons = require('../database/persons.js');
 
-router.get('/get-all', (req, res) => {
+router.get('/', (req, res) => {
     res.json(persons);
 });
 
 
-router.get('/get/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     var getPerson = 'not success';
     for(var i = 0; i < persons.length; i++) {
         if (
@@ -21,7 +21,7 @@ router.get('/get/:id', (req, res) => {
     res.json(getPerson);
 });
 
-router.post('/add-person', (req, res) => {
+router.post('/', (req, res) => {
     var state;
     if (
         !(req.body.firstName) ||
@@ -51,7 +51,7 @@ router.post('/add-person', (req, res) => {
     res.json(state);
 });
 
-router.put('/edit-person/:id',(req, res) => {
+router.put('/:id',(req, res) => {
     var state;
     if (
         !(req.body.firstName)   ||
@@ -78,7 +78,7 @@ router.put('/edit-person/:id',(req, res) => {
     res.json(state);
 });
 
-router.delete('/delete-person/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     var state = 'not success';
     for(var i = 0; i < persons.length; i++) {
         if (

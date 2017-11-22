@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Person } from '../shared/models/person.model';
 import { PersonService } from '../shared/services/person.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +16,8 @@ export class EditPersonComponent implements OnInit {
     private personService: PersonService,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private cookieService: CookieService
   ) { }
   ngOnInit() {
     this.getPerson();
@@ -35,6 +37,11 @@ export class EditPersonComponent implements OnInit {
   editPerson(): void {
     this.personService.editPerson(this.person).subscribe(
       (res) => {
+        if (res === 'success') {
+          this.cookieService.set('edit-state', 'success');
+        } else {
+          this.cookieService.set('edit-state', 'not success');
+        }
         this.router.navigate([`/profile/${this.person.id}`]);
       }
     );

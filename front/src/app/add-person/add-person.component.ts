@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { PersonService } from '../shared/services/person.service';
 import { Person } from '../shared/models/person.model';
 import { Component, OnInit } from '@angular/core';
@@ -12,13 +13,14 @@ export class AddPersonComponent implements OnInit {
   newPerson = {
     firstName: undefined,
     lastName: undefined,
-    email: '-',
+    email: undefined,
     phone: undefined,
     notes: '-'
   };
   constructor(
     private location: Location,
-    private personService: PersonService
+    private personService: PersonService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() { }
@@ -28,6 +30,11 @@ export class AddPersonComponent implements OnInit {
   addPerson() {
     this.personService.addPerson(this.newPerson).subscribe(
       (res) => {
+        if (res === 'success') {
+          this.cookieService.set('add-state', 'success');
+        } else {
+          this.cookieService.set('add-state', 'not success');
+        }
          this.goBack();
       }
     );

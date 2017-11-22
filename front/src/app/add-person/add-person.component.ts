@@ -13,7 +13,7 @@ export class AddPersonComponent implements OnInit {
   newPerson = {
     firstName: undefined,
     lastName: undefined,
-    email: '-',
+    email: undefined,
     phone: undefined,
     notes: '-'
   };

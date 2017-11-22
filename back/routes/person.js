@@ -26,7 +26,8 @@ router.post('/add-person', (req, res) => {
     if (
         !(req.body.firstName) ||
         !(req.body.lastName)  ||
-        !(req.body.phone)
+        !(req.body.email)     ||
+        !(req.body.phone)    
     ) {
         state = 'not success';
     }
@@ -55,6 +56,7 @@ router.put('/edit-person/:id',(req, res) => {
     if (
         !(req.body.firstName)   ||
         !(req.body.lastName)    ||
+        !(req.body.email)       ||
         !(req.body.phone)      
     ) {
         state = 'not success';

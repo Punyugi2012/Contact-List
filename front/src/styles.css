@@ -1,3 +1,24 @@
 body {
   background-image: url(https://273hny3uh9sk23twrq16r4aw-wpengine.netdna-ssl.com/wp-content/uploads/2015/12/blurry-crowd-people-iStock_000002228169Large.jpg);
 }
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 1s linear infinite;
+  margin: auto;
+  position: relative;
+  top: 20em;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

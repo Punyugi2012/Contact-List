@@ -7,6 +7,15 @@ router.get('/', (req, res) => {
     res.json(persons);
 });
 
+// router.get('/:firstName', (req, res) => {
+//     var personBuffer = [];
+//     persons.forEach(function(person) {
+//         if(person.firstName === req.params.firstName) {
+//            personBuffer.push(person);
+//         }
+//     });
+//     res.json(personBuffer);
+// });
 
 router.get('/:id', (req, res) => {
     var getPerson = 'not success';

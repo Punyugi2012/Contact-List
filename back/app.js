@@ -6,14 +6,15 @@ var cors = require('cors');
 var app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
     console.log(`Request: ${req.method}.....${req.url}.....${new Date()}`);
     next();
 });
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/persons', personRouter);
-app.use('*', function (req, res) {
+
+app.all('*', function (req, res) {
     res.status(404);
     res.json({});
 });

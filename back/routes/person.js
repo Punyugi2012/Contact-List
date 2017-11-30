@@ -7,19 +7,9 @@ router.get('/', (req, res) => {
     res.json(persons);
 });
 
-// router.get('/:firstName', (req, res) => {
-//     var personBuffer = [];
-//     persons.forEach(function(person) {
-//         if(person.firstName === req.params.firstName) {
-//            personBuffer.push(person);
-//         }
-//     });
-//     res.json(personBuffer);
-// });
-
 router.get('/:id', (req, res) => {
     var getPerson = 'not success';
-    for(var i = 0; i < persons.length; i++) {
+    for (var i = 0; i < persons.length; i++) {
         if (
             persons[i].id === req.params.id
         ) {
@@ -34,16 +24,15 @@ router.post('/', (req, res) => {
     var state;
     if (
         !(req.body.firstName) ||
-        !(req.body.lastName)  ||
-        !(req.body.email)     ||
-        !(req.body.phone)    
+        !(req.body.lastName) ||
+        !(req.body.email) ||
+        !(req.body.phone)
     ) {
         state = 'not success';
     }
     else {
         var newId = 0;
-        if(persons.length) {
-            
+        if (persons.length) {
             newId = parseInt(persons[persons.length - 1].id) + 1;
         }
         var newPerson = {
@@ -60,20 +49,20 @@ router.post('/', (req, res) => {
     res.json(state);
 });
 
-router.put('/:id',(req, res) => {
+router.put('/:id', (req, res) => {
     var state;
     if (
-        !(req.body.firstName)   ||
-        !(req.body.lastName)    ||
-        !(req.body.email)       ||
-        !(req.body.phone)      
+        !(req.body.firstName) ||
+        !(req.body.lastName) ||
+        !(req.body.email) ||
+        !(req.body.phone)
     ) {
         state = 'not success';
     }
     else {
         var i = 0;
-        for(i = 0; i < persons.length; i++) {
-            if(persons[i].id === req.params.id) {
+        for (i = 0; i < persons.length; i++) {
+            if (persons[i].id === req.params.id) {
                 persons[i].firstName = req.body.firstName;
                 persons[i].lastName = req.body.lastName;
                 persons[i].email = req.body.email;
@@ -89,7 +78,7 @@ router.put('/:id',(req, res) => {
 
 router.delete('/:id', (req, res) => {
     var state = 'not success';
-    for(var i = 0; i < persons.length; i++) {
+    for (var i = 0; i < persons.length; i++) {
         if (
             persons[i].id === req.params.id
         ) {

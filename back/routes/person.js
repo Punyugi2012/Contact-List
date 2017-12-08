@@ -4,7 +4,18 @@ var router = express.Router();
 var persons = require('../database/persons.js');
 
 router.get('/', (req, res) => {
-    res.json(persons);
+    if(req.query.firstName) {
+        var personBuffer = [];
+        persons.forEach(function(person) {
+            if(person.firstName === req.query.firstName) {
+                personBuffer.push(person);
+            }
+        });
+        res.json(personBuffer);
+    }
+    else {
+        res.json(persons);
+    }
 });
 
 router.get('/:id', (req, res) => {
